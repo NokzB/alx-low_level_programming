@@ -2,9 +2,9 @@
 
 /**
 * main - prints numbers from 1 to 100
-* prints FizzBuzz with multiples of 3 and 5
-* prints Fiss with multiples of 3
-* prints buzz with multiples of 5
+* multiples of 3 print Fizz
+* multiples of 5 print Buzz
+* multiples of both 3 and 5 print FizzBuzz
 * Return: Always 0 (success)
 */
 
@@ -22,7 +22,7 @@ int main(void)
 		{
 			printf("Buzz ");
 		}
-		else if (i % 3 == 0 && i % 5 == 0)
+		else if (i % 15 == 0)
 		{
 			printf("FizzBuzz ");
 		}
