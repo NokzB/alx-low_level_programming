@@ -4,7 +4,7 @@
 * @dest: the destination of the concatenated string
 * @src: the source of the concatenated string
 * @n: an integer
-* Return: destination
+* Return: dest
 */
 
 char *_strncat(char *dest, char *src, int n)
@@ -19,7 +19,7 @@ char *_strncat(char *dest, char *src, int n)
 		i++;
 	}
 
-	j - 0;
+	j = 0;
 
 	while (src[j] != 0 && j < n)
 	{
