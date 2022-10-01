@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
 * cap_string - capitalises the first letter of every word in a string
 * @str: the string to be capitalized
@@ -7,33 +8,29 @@
 
 char *cap_string(char *str)
 {
-	char sep[] = ",\t;\n; .!?\"(){}";
-	int h, i, j;
+	int i, x;
+	int cap = 32;
+	char sep[] = {',', ';', '.', '?', '"', '(', ')', '{', '}', ' ', '\n', '\t'};
+
 
 	for (i = 0; str[i] != '\0'; i++)
 	{
-		h = 0;
-	}
-	if (i == 0)
-	{
-		h = 1;
-	}
-	else
-	{
-		for (j = 0; sep[j] != '\0'; j++)
+
+		if (str[i] >= 'a' && str[i] <= 'z')
 		{
-			if (str[i - 1] == sep[j])
-			{
-				h = 1;
-				break;
-			}
+			str[i] = str[i] - cap;
 		}
-	}
-	if (h == 1)
-	{
-		if (str[i] <= 'z' && str[i] >= 'a')
+
+		cap = 0;
 		{
-			str[i] = ('a' - 'A');
+			for (x = 0; x <= 12; x++)
+			{
+				if (str[i] == sep[x])
+				{
+					x = 12;
+					cap = 32;
+				}
+			}
 		}
 	}
 	return (str);
