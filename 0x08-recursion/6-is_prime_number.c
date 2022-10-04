@@ -15,7 +15,10 @@ int evaluate(int a, int b)
 	else if (a % b == 0)
 		return (0);
 
-	return (evaluate(a, b + 1));
+	if (a % b != 0)
+		return (evaluate(a, b + 1));
+
+	return (0);
 }
 
 /**
@@ -26,8 +29,15 @@ int evaluate(int a, int b)
 
 int is_prime_number(int n)
 {
-	if (n <= 1)
+	int b;
+
+	b = 2;
+
+	if (n < 2)
 		return (0);
 
-	return (evaluate(n, 2));
+	if (n == 2)
+		return (1);
+
+	return (evaluate(n, b));
 }
