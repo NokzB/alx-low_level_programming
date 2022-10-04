@@ -1,0 +1,33 @@
+#include "main.h"
+
+/**
+* evaluate - function to eevaluate numbers
+* @a: input number
+* @b: input number
+* Return: 0 or 1
+*/
+
+int evaluate(int a, int b)
+{
+	if (a == b - 1)
+		return (1);
+
+	else if (a % b == 0)
+		return (0);
+
+	return (evaluate(a, b + 1));
+}
+
+/**
+* is_prime_number - checks if numebr is a prime number
+* @n: input number
+* Return: 1 if prime number, 0 if not
+*/
+
+int is_prime_number(int n)
+{
+	if (n <= 1)
+		return (0);
+
+	return (evaluate(n, 2));
+}
