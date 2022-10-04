@@ -9,7 +9,7 @@
 
 int evaluate(int a, int b)
 {
-	if (a == b - 1)
+	if (b == a - 1)
 	{
 		return (1);
 	}
