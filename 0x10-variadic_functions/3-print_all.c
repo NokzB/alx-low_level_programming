@@ -1,17 +1,16 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include "variadic_functions.h"
-
 /**
 * print_all - prints anything
 * @format: arguments passed to the function
 */
 void print_all(const char * const format, ...)
 {
+	va_list list;
 	unsigned int a = 0, b, c = 0;
 	char *str;
 	const char t_arg[] = "cifs";
-	va_list list;
 
 	va_start(list, format);
 	while (format && format[a])
@@ -46,5 +45,6 @@ void print_all(const char * const format, ...)
 			printf("%s", str);
 			break;
 		} a++;
+	}
 	printf("\n"), va_end(list);
 }
