@@ -1,9 +1,12 @@
 #include "lists.h"
 
-/*
-* add_node_end - adds a node at the end of the list
+/**
+* add_node_end - a function that adds a node at the end of the list
 * @head: pointer to pointer to the head of the list
 * @str: string to be duplicated
+*
+* Description: when this function is called
+* it will add a node to the end of the list
 * Return: address to the new element, NULL if failed
 */
 
