@@ -1,9 +1,9 @@
+#include <stdio.h>
 #include "lists.h"
 
 /**
 * print_listint - prints all elements of listint_t
 * @h: list
-*
 * Return: number of nodes
 */
 
