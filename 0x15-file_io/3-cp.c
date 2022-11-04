@@ -3,48 +3,69 @@
 #include "main.h"
 
 /**
-* main - copies the  of contents from a file to another file
-* @argv: number of arguments passed to the program
-* @argc: array of arguments
+* error_file - checks if files can be opened
+* @file_from:  file to be copied from
+* @file_to: file to be copied to
+* @argv: array of arguments
+* Return: no return
+*/
+
+void error_file(int file_from, int file_to, char *argv[])
+{
+	if (file_from == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		exit(98);
+	}
+	if (file_to == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		exit(99);
+	}
+}
+
+/**
+* main - copies the contents from a file to another file
+* @argc: number of arguments passed to the program
+* @argv: array of arguments
 * Return: 0 (success)
 */
-int main(int argv, char *argc[])
+int main(int argc, char *argv[])
 {
-	int f_f, f_t, k, i, j;
-	char *buf[BUFSIZ];
+	int f_f, f_t, err_close;
+	ssize_t nchars, nwr;
+	char buf[1024];
 
-	if (argv != 3)
+	if (argc != 3)
 	{
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
 
-	f_f = open(argc[1], O_RDONLY);
-	if (f_f < 0)
+	f_f = open(argv[1], O_RDONLY);
+	f_t = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	error_file(f_f, f_t, argv);
+
+	nchars = 1024;
+	while (nchars == 1024)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argc[1]);
-		exit(98);
-	}
-	f_t = open(argc[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
-	while ((k = read(f_f, buf, BUFSIZ)) > 0)
-	{
-		if (f_t < 0 || write(f_t, buf, k) != k)
-		{
-			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argc[2]);
-			exit(99);
-		}
+		nchars = read(f_f, buf, 1024);
+		if (nchars == -1)
+			error_file(-1, 0, argv);
+		nwr = write(f_t, buf, nchars);
+		if (nwr == -1)
+			error_file(0, -1, argv);
 	}
 
-	if (k < 0);
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argc[1]);
-		exit(98);
-	}
-	i = close(f_f);
-	j = close(f_t);
-	if (i < 0 || j < 0)
+	err_close = close(f_f);
+	if (err_close == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", f_f);
+		exit(100);
+	}
+	err_close = close(f_t);
+	if (err_close == -1)
+	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", f_t);
 		exit(100);
 	}
