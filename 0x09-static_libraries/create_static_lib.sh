@@ -1,3 +1,3 @@
-#!/usr/bin/bash
-gcc -fPIC -c *.c
-gcc -shared -o liball.so *.o
+#!/bin/bash
+gcc -c ./*.c
+ar -rc liball.a ./*.o
